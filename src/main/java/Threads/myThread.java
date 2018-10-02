@@ -22,7 +22,7 @@ public class myThread {
 
 //    public static final Logger logger = LogManager.getLogger(ThreadMain.class);
 
-    private File inputFile = new File("src/main/resources/numbers.txt");
+    private File inputFile = new File("ufo/main/resources/ufo-sightings/scrubbed.csv");
 
     public myThread(int threads) {
         this.numThreads = threads;

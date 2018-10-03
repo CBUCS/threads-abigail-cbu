@@ -1,11 +1,11 @@
-import Threads.myThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import threads.myThread;
 
 /**
  * Name: Abigail Lu
  * Date: 10/1/2018
- * Threads Homework
+ * threads Homework
  * CSC 527
  *
  * Description:
@@ -28,9 +28,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        logger.info("Hello, world");
-//        myThread main = new myThread(10);
-//        main.main();
+//        logger.info("Hello, world");
+        myThread main = new myThread(10);
+        main.main();
 
     }
 }

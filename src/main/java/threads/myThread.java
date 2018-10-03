@@ -1,15 +1,12 @@
-package Threads;
+package threads;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 public class myThread {
     protected int numThreads = 4;
@@ -25,7 +22,7 @@ public class myThread {
 
     public void main() {
 
-        String csvFile = "ufo/main/resources/ufo-sightings/scrubbed.csv";
+        String csvFile = "src/main/resources/ufo-sightings/scrubbed.csv";
         String line = "";
         String cvsSplitBy = ",";
 

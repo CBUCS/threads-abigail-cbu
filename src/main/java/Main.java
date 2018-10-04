@@ -34,5 +34,9 @@ public class Main {
 
         myThread main2 = new myThread(2);
         logger.info(main2.main(myThread.SearchItem.state));
+
+        myThread main3 = new myThread(4);
+        logger.info(main3.main(myThread.SearchItem.datetime)); // this is displaying all values found
+
     }
 }

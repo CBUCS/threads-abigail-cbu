@@ -1,14 +1,14 @@
 package threads;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.swing.text.DateFormatter;
 
 
 public class myThread {
@@ -31,7 +31,7 @@ public class myThread {
     public myThread(int threads) {
         this.numThreads = threads;
         this.counter = 0;
-        this.stringMap =  new HashMap<Integer, List<String>>();
+        this.stringMap = new HashMap<Integer, List<String>>();
         this.mapper = new ArrayList<UfoMapper>();
         this.threads = new ArrayList<Thread>();
     }
@@ -68,6 +68,8 @@ public class myThread {
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
+            br.readLine(); // skip first line where column headers are located
+
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
@@ -82,7 +84,7 @@ public class myThread {
                         if (!this.stringMap.containsKey(counter % this.numThreads)) {
                             this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
                         }
-                        this.stringMap.get(counter % this.numThreads).add(ufoInfo[SearchItem.country.getIndex()]); // starting with country
+                        this.stringMap.get(counter % this.numThreads).add(ufoInfo[SearchItem.country.getIndex()]);
                     }
                 } else if (search == SearchItem.state) {
                     // create key for state
@@ -91,15 +93,25 @@ public class myThread {
                         if (!this.stringMap.containsKey(counter % this.numThreads)) {
                             this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
                         }
-                        this.stringMap.get(counter % this.numThreads).add(ufoInfo[SearchItem.state.getIndex()]); // starting with country
+                        this.stringMap.get(counter % this.numThreads).add(ufoInfo[SearchItem.state.getIndex()]);
                     }
-                } else if(search == SearchItem.datetime) {
+                } else if (search == SearchItem.datetime) {
                     if (!ufoInfo[SearchItem.datetime.getIndex()].isEmpty()) {
-//                        logger.debug("Key for StringMap: " + counter % this.numThreads);
+
+                        String[] dateTime = ufoInfo[SearchItem.datetime.getIndex()].split(" ");
+                        String[] date = dateTime[0].split("/");
+
                         if (!this.stringMap.containsKey(counter % this.numThreads)) {
                             this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
                         }
-                        this.stringMap.get(counter % this.numThreads).add(ufoInfo[SearchItem.datetime.getIndex()]); // starting with country
+                        this.stringMap.get(counter % this.numThreads).add(date[0]); // get month
+
+                        counter++;
+                        if (!this.stringMap.containsKey(counter % this.numThreads)) {
+                            this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
+                        }
+                        this.stringMap.get(counter % this.numThreads).add(date[2]); // get year
+
                     }
                 }
                 counter++;
@@ -142,7 +154,6 @@ public class myThread {
         } catch (Exception e) {
         }
 
-        logger.info(UfoMapper.ufoMap); // outputs count for map
         return UfoMapper.ufoMap.toString();
 
         /*** Country ***/

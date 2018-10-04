@@ -22,9 +22,10 @@ public class UfoMapper implements Runnable {
     public static ConcurrentHashMap<String, Integer> ufoMap = new ConcurrentHashMap<String, Integer>();
 
     public UfoMapper(List<String> input) {
-        this.threadId = UfoMapper.id++;
+        this.threadId = id;
         logger.info("Creating thread: " + this.threadId);
         ufoList.addAll(input);
+        UfoMapper.id++;
     }
 
     public int getId() {
@@ -65,5 +66,11 @@ public class UfoMapper implements Runnable {
     public boolean isDone() {
         return this.isDone;
     } // this might not be true....
+
+    public void clearMap() {
+        this.ufoList = new ArrayList<String>();
+        this.ufoMap = new ConcurrentHashMap<String, Integer>();
+        this.id = 1;
+    }
 
 }

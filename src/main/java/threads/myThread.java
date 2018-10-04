@@ -60,7 +60,7 @@ public class myThread {
         }
     }
 
-    public String main(SearchItem search) {
+    public void main(SearchItem search) {
 
         String csvFile = "src/main/resources/ufo-sightings/scrubbed.csv";
         String line = "";
@@ -154,7 +154,11 @@ public class myThread {
         } catch (Exception e) {
         }
 
-        return UfoMapper.ufoMap.toString();
+        logger.info(UfoMapper.ufoMap);
+
+        for (UfoMapper thread : this.mapper) {
+            thread.clearMap();
+        }
 
         /*** Country ***/
         //[INFO ] threads.myThread - {country=1, de=105, au=538, gb=1887, us=48204, ca=2945}

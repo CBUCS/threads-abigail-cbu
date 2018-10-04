@@ -30,13 +30,15 @@ public class Main {
 
 //        logger.info("Hello, world");
         myThread main = new myThread(2);
-        logger.info(main.main(myThread.SearchItem.country));
+        main.main(myThread.SearchItem.country);
 
         myThread main2 = new myThread(2);
-        logger.info(main2.main(myThread.SearchItem.state));
+        main2.main(myThread.SearchItem.state);
 
         myThread main3 = new myThread(4);
-        logger.info(main3.main(myThread.SearchItem.datetime)); // this is displaying all values found
+        main3.main(myThread.SearchItem.datetime); // if running all of them it is displaying all values found
+
+        
 
     }
 }

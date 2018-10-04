@@ -35,10 +35,8 @@ public class Main {
         myThread main2 = new myThread(2);
         main2.main(myThread.SearchItem.state);
 
-        myThread main3 = new myThread(4);
+        myThread main3 = new myThread(8);
         main3.main(myThread.SearchItem.datetime); // if running all of them it is displaying all values found
-
-        
 
     }
 }

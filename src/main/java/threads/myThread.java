@@ -2,6 +2,7 @@ package threads;
 
 import java.io.*;
 
+import java.text.DateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -101,6 +102,11 @@ public class myThread {
                         String[] dateTime = ufoInfo[SearchItem.datetime.getIndex()].split(" ");
                         String[] date = dateTime[0].split("/");
 
+//                        String d = ufoInfo[SearchItem.datetime.getIndex()];
+//                        d.replace('/', '-');
+//                        DateFormat sdf = new java.text.SimpleDateFormat ("HH:mm");
+//                        Date pared = sdf.parse("12-2-2");
+
                         if (!this.stringMap.containsKey(counter % this.numThreads)) {
                             this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
                         }
@@ -112,6 +118,11 @@ public class myThread {
                         }
                         this.stringMap.get(counter % this.numThreads).add(date[2]); // get year
 
+                        counter++;
+                        if (!this.stringMap.containsKey(counter % this.numThreads)) {
+                            this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
+                        }
+                        this.stringMap.get(counter % this.numThreads).add(dateTime[1]); // get datetime, still need to get blocked dates
                     }
                 }
                 counter++;

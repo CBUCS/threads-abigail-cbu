@@ -17,14 +17,14 @@ public class UfoMapper implements Runnable {
 
     private boolean isDone = false;
 
-    private List<String> countryList = new ArrayList<String>();
+    private List<String> ufoList = new ArrayList<String>();
 
-    public static ConcurrentHashMap<String, Integer> countryMapper = new ConcurrentHashMap<String, Integer>();
+    public static ConcurrentHashMap<String, Integer> ufoMap = new ConcurrentHashMap<String, Integer>();
 
     public UfoMapper(List<String> input) {
         this.threadId = UfoMapper.id++;
         logger.info("Creating thread: " + this.threadId);
-        countryList.addAll(input);
+        ufoList.addAll(input);
     }
 
     public int getId() {
@@ -36,14 +36,14 @@ public class UfoMapper implements Runnable {
 
         logger.info("Hello, from thread: " + this.threadId);
 
-        for (String country : this.countryList) {
+        for (String searchItem : this.ufoList) {
 //            if (offset % 10000 == 0) {
-//                logger.info(String.format("Thread: %d\toffset: %d\tdata: %d", this.threadId, offset, country));
+//            logger.info(String.format("Thread: %d\toffset: %d\tdata: " + searchItem, this.threadId, offset));
 //            }
 
-            logger.info(String.format("Thread: %d\toffset: %d\tdata: " + country, this.threadId, offset));
+//            logger.info(String.format("Thread: %d\toffset: %d\tdata: " + searchItem, this.threadId, offset));
 
-            this.incrementAt(country);
+            this.incrementAt(searchItem);
 
             offset++;
         }
@@ -53,17 +53,17 @@ public class UfoMapper implements Runnable {
 
     public void incrementAt(String key) {
         int value;
-        if (countryMapper.containsKey(key)) {
-            value = countryMapper.get(key) + 1;
+        if (ufoMap.containsKey(key)) {
+            value = ufoMap.get(key) + 1;
         } else {
-            countryMapper.put(key, 0);
+            ufoMap.put(key, 0);
             value = 1;
         }
-        countryMapper.put(key, value);
+        ufoMap.put(key, value);
     }
 
     public boolean isDone() {
         return this.isDone;
-    }
+    } // this might not be true....
 
 }

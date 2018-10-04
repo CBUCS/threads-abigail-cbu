@@ -79,7 +79,6 @@ public class myThread {
 //                logger.info("DateTime [code= " + ufoInfo[0] + " , City=" + ufoInfo[1] + "]");
 
                 if (search == SearchItem.country) {
-                    // create key for country
                     if (!ufoInfo[SearchItem.country.getIndex()].isEmpty()) {
 //                        logger.debug("Key for StringMap: " + counter % this.numThreads);
                         if (!this.stringMap.containsKey(counter % this.numThreads)) {
@@ -88,9 +87,7 @@ public class myThread {
                         this.stringMap.get(counter % this.numThreads).add(ufoInfo[SearchItem.country.getIndex()]);
                     }
                 } else if (search == SearchItem.state) {
-                    // create key for state
                     if (!ufoInfo[SearchItem.state.getIndex()].isEmpty() && (ufoInfo[SearchItem.country.getIndex()].equals("us") || ufoInfo[SearchItem.country.getIndex()].equals("ca"))) {
-//                        logger.debug("Key for StringMap: " + counter % this.numThreads);
                         if (!this.stringMap.containsKey(counter % this.numThreads)) {
                             this.stringMap.put(counter % this.numThreads, new ArrayList<String>());
                         }
@@ -102,6 +99,7 @@ public class myThread {
                         String[] dateTime = ufoInfo[SearchItem.datetime.getIndex()].split(" ");
                         String[] date = dateTime[0].split("/");
 
+                        // todo: get dateTime
 //                        String d = ufoInfo[SearchItem.datetime.getIndex()];
 //                        d.replace('/', '-');
 //                        DateFormat sdf = new java.text.SimpleDateFormat ("HH:mm");

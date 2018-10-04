@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args) {
 
 //        logger.info("Hello, world");
-        myThread main = new myThread(10);
+        myThread main = new myThread(1);
         main.main();
 
     }
